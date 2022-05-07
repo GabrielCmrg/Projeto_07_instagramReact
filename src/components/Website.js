@@ -6,9 +6,7 @@ export default function Website() {
     return (
         <div>
             <NavBar />
-
             <Body />
-
             <BottomMenu />
         </div>
     )

@@ -38,7 +38,7 @@ body {
   height: 100%;
 }
 
-.navbar .container > * {
+.navbar .container > div > * {
   display: flex;
   align-items: center;
   height: 100%;
@@ -68,10 +68,6 @@ body {
 
 .navbar .icones ion-icon {
   margin: 0 5px;
-}
-
-.navbar .icones-mobile {
-  display: none;
 }
 
 .corpo {
@@ -306,7 +302,7 @@ body {
   cursor: pointer;
 }
 
-.logo-mobile, .instagram-mobile {
+.logo-mobile, .instagram-mobile, .icones-mobile {
   display: none !important;
 }
 
@@ -351,17 +347,12 @@ body {
     margin-top: 0;
   }
 
-  .navbar .pesquisa {
+  .navbar .container .logo,
+  .navbar .container .pesquisa,
+  .navbar .container .icones {
     display: none;
   }
 
-  .navbar .icones {
-    display: none;
-  }
-
-  .navbar .icones-mobile {
-    display: flex;
-  }
 
   .fundo-mobile {
     display: flex;
@@ -378,11 +369,7 @@ body {
     left: 0;
   }
 
-  .navbar .logo {
-    display: none;
-  }
-
-  .logo-mobile, .instagram-mobile {
+  .logo-mobile, .instagram-mobile, .icones-mobile {
     display: flex !important;
   }
 
