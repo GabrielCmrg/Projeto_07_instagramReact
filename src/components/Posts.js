@@ -1,38 +1,56 @@
+function Top(props) {
+    return (
+        <div class="topo">
+            <div class="usuario">
+                <img src={props.from.src} alt="Imagem do criador do post"/>
+                {props.from.profile}
+            </div>
+            <div class="acoes">
+                <ion-icon name="ellipsis-horizontal"></ion-icon>
+            </div>
+        </div>
+    )
+}
+
+function Actions() {
+    return (
+        <div class="acoes">
+            <div>
+                <ion-icon name="heart-outline"></ion-icon>
+                <ion-icon name="chatbubble-outline"></ion-icon>
+                <ion-icon name="paper-plane-outline"></ion-icon>
+            </div>
+            <div>
+                <ion-icon name="bookmark-outline"></ion-icon>
+            </div>
+        </div>
+    )
+}
+
+function Likes(props) {
+    return (
+        <div class="curtidas">
+            <img src={props.from.src} alt="Imagem do destaque"/>
+            <div class="texto">
+                Curtido por <strong>{props.from.profile}</strong> e <strong>outras {props.likes} pessoas</strong>
+            </div>
+        </div>
+    )
+}
+
 function Post(props) {
     return (
         <div class="post">
-            <div class="topo">
-                <div class="usuario">
-                    <img src={props.from.src} />
-                    {props.from.profile}
-                </div>
-                <div class="acoes">
-                    <ion-icon name="ellipsis-horizontal"></ion-icon>
-                </div>
-            </div>
+            <Top from={props.from} />
 
             <div class="conteudo">
-                <img src={props.content} />
+                <img src={props.content} alt="Imagem do post"/>
             </div>
 
             <div class="fundo">
-                <div class="acoes">
-                    <div>
-                        <ion-icon name="heart-outline"></ion-icon>
-                        <ion-icon name="chatbubble-outline"></ion-icon>
-                        <ion-icon name="paper-plane-outline"></ion-icon>
-                    </div>
-                    <div>
-                        <ion-icon name="bookmark-outline"></ion-icon>
-                    </div>
-                </div>
+                <Actions />
 
-                <div class="curtidas">
-                    <img src={props.whoLiked.src} />
-                    <div class="texto">
-                        Curtido por <strong>{props.whoLiked.profile}</strong> e <strong>outras {props.likes} pessoas</strong>
-                    </div>
-                </div>
+                <Likes from={props.whoLiked} likes={props.likes}/>
             </div>
         </div>
     )

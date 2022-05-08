@@ -2,7 +2,7 @@ function Story(props) {
     return (
         <div class="story">
             <div class="imagem">
-                <img src={props.src} />
+                <img src={props.src} alt="Foto de perfil"/>
             </div>
             <div class="usuario">
                 {props.profile}
