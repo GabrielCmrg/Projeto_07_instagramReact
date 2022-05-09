@@ -76,7 +76,7 @@ function Post(props) {
             </div>
 
             <div class="fundo">
-                <Actions liked={liked} setLiked={setLiked} update={updateLikesCount} />
+                <Actions liked={liked} setLiked={setLiked} />
                 <Likes from={props.whoLiked} likes={likes} />
             </div>
         </div>
