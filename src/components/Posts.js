@@ -20,7 +20,6 @@ function Actions(props) {
 
     function toggleLike() {
         props.setLiked(!props.liked);
-        props.update();
     }
 
     return (
@@ -52,19 +51,19 @@ function Likes(props) {
 function Post(props) {
     const [liked, setLiked] = react.useState(false);
     const [likes, setLikes] = react.useState(props.likes);
+    react.useEffect(updateLikesCount, [liked]);
 
     function updateLikesCount() {
-        if (!liked) {
+        if (liked) {
             setLikes(likes + 1);
         } else {
-            setLikes(likes - 1);
+            setLikes(props.likes);
         }
     }
 
     function likePost() {
         if (!liked) {
             setLiked(true);
-            updateLikesCount();
         }
     }
 
