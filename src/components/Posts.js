@@ -42,7 +42,8 @@ function Likes(props) {
         <div class="curtidas">
             <img src={props.from.src} alt="Imagem do destaque"/>
             <div class="texto">
-                Curtido por <strong>{props.from.profile}</strong> e <strong>outras {props.likes} pessoas</strong>
+                Curtido por <strong>{props.from.profile}</strong> e 
+                <strong>outras {props.likes.toLocaleString()} pessoas</strong>
             </div>
         </div>
     )
@@ -53,13 +54,11 @@ function Post(props) {
     const [likes, setLikes] = react.useState(props.likes);
 
     function updateLikesCount() {
-        let likesNumber = Number(likes.replace(".", ""));
         if (!liked) {
-            likesNumber++;
+            setLikes(likes + 1);
         } else {
-            likesNumber--;
+            setLikes(likes - 1);
         }
-        setLikes(likesNumber.toLocaleString());
     }
 
     function likePost() {
@@ -91,19 +90,25 @@ export default function Posts() {
             from: {profile: "meowed", src: "assets/img/meowed.svg"},
             content: "assets/img/gato-telefone.svg",
             whoLiked: {profile: "respondeai", src: "assets/img/respondeai.svg"},
-            likes: "101.523"
+            likes: 101_523
         },
         {
             from: {profile: "barked", src: "assets/img/barked.svg"},
             content: "assets/img/dog.svg",
             whoLiked: {profile: "adorable_animals", src: "assets/img/adorable_animals.svg"},
-            likes: "99.159"
+            likes: 99_159
         }
     ]
 
     return (
         <div class="posts">
-            {posts.map(post => <Post from={post.from} content={post.content} whoLiked={post.whoLiked} likes={post.likes} />)}
+            {posts.map(
+                post => <Post 
+                        from={post.from} content={post.content} 
+                        whoLiked={post.whoLiked} likes={post.likes} 
+                        />
+                )
+            }
         </div>
     )
 }
