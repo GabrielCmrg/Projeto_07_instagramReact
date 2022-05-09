@@ -14,9 +14,9 @@ function Top(props) {
     )
 }
 
-function Bottom(props) {
-    let icon = (props.liked) ? "heart" : "heart-outline";
-    let style = (props.liked) ? "red" : "";
+function Actions(props) {
+    const icon = (props.liked) ? "heart" : "heart-outline";
+    const style = (props.liked) ? "red" : "";
 
     function toggleLike() {
         props.setLiked(!props.liked);
@@ -24,26 +24,26 @@ function Bottom(props) {
     }
 
     return (
-        <div class="fundo">
-
-            <div class="acoes">
-                <div>
-                    <ion-icon name={icon} onClick={toggleLike} id={style}></ion-icon>
-                    <ion-icon name="chatbubble-outline"></ion-icon>
-                    <ion-icon name="paper-plane-outline"></ion-icon>
-                </div>
-                <div>
-                    <ion-icon name="bookmark-outline"></ion-icon>
-                </div>
+        <div class="acoes">
+            <div>
+                <ion-icon name={icon} onClick={toggleLike} id={style}></ion-icon>
+                <ion-icon name="chatbubble-outline"></ion-icon>
+                <ion-icon name="paper-plane-outline"></ion-icon>
             </div>
-
-            <div class="curtidas">
-                <img src={props.from.src} alt="Imagem do destaque"/>
-                <div class="texto">
-                    Curtido por <strong>{props.from.profile}</strong> e <strong>outras {props.likes} pessoas</strong>
-                </div>
+            <div>
+                <ion-icon name="bookmark-outline"></ion-icon>
             </div>
+        </div>
+    )
+}
 
+function Likes(props) {
+    return (
+        <div class="curtidas">
+            <img src={props.from.src} alt="Imagem do destaque"/>
+            <div class="texto">
+                Curtido por <strong>{props.from.profile}</strong> e <strong>outras {props.likes} pessoas</strong>
+            </div>
         </div>
     )
 }
@@ -77,7 +77,10 @@ function Post(props) {
                 <img src={props.content} alt="Imagem do post" onClick={likePost} />
             </div>
 
-            <Bottom from={props.whoLiked} likes={likes} liked={liked} setLiked={setLiked} update={updateLikesCount}/>
+            <div class="fundo">
+                <Actions liked={liked} setLiked={setLiked} update={updateLikesCount} />
+                <Likes from={props.whoLiked} likes={likes} />
+            </div>
         </div>
     )
 }
