@@ -15,20 +15,12 @@ function Top(props) {
 }
 
 function Bottom(props) {
-    const [liked, setLiked] = react.useState(false);
-    const [likes, setLikes] = react.useState(props.likes);
-    let icon = (liked) ? "heart" : "heart-outline";
-    let style = (liked) ? "red" : "";
+    let icon = (props.liked) ? "heart" : "heart-outline";
+    let style = (props.liked) ? "red" : "";
 
     function toggleLike() {
-        setLiked(!liked);
-        let likesNumber = Number(likes.replace(".", ""));
-        if (!liked) {
-            likesNumber++;
-        } else {
-            likesNumber--;
-        }
-        setLikes(likesNumber.toLocaleString());
+        props.setLiked(!props.liked);
+        props.update();
     }
 
     return (
@@ -48,7 +40,7 @@ function Bottom(props) {
             <div class="curtidas">
                 <img src={props.from.src} alt="Imagem do destaque"/>
                 <div class="texto">
-                    Curtido por <strong>{props.from.profile}</strong> e <strong>outras {likes} pessoas</strong>
+                    Curtido por <strong>{props.from.profile}</strong> e <strong>outras {props.likes} pessoas</strong>
                 </div>
             </div>
 
@@ -57,15 +49,35 @@ function Bottom(props) {
 }
 
 function Post(props) {
+    const [liked, setLiked] = react.useState(false);
+    const [likes, setLikes] = react.useState(props.likes);
+
+    function updateLikesCount() {
+        let likesNumber = Number(likes.replace(".", ""));
+        if (!liked) {
+            likesNumber++;
+        } else {
+            likesNumber--;
+        }
+        setLikes(likesNumber.toLocaleString());
+    }
+
+    function likePost() {
+        if (!liked) {
+            setLiked(true);
+            updateLikesCount();
+        }
+    }
+
     return (
         <div class="post">
             <Top from={props.from} />
 
             <div class="conteudo">
-                <img src={props.content} alt="Imagem do post"/>
+                <img src={props.content} alt="Imagem do post" onClick={likePost} />
             </div>
 
-            <Bottom from={props.whoLiked} likes={props.likes} />
+            <Bottom from={props.whoLiked} likes={likes} liked={liked} setLiked={setLiked} update={updateLikesCount}/>
         </div>
     )
 }

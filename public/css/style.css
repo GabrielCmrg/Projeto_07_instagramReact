@@ -172,7 +172,7 @@ body {
   margin-right: 10px;
 }
 
-.post .usuario, .post .topo img, .post .fundo img, .post ion-icon, .post strong {
+.post .usuario, .post img, .post .fundo img, .post ion-icon, .post strong {
   cursor: pointer;
 }
 
