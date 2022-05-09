@@ -14,36 +14,44 @@ function Top(props) {
     )
 }
 
-function Actions() {
+function Bottom(props) {
     const [liked, setLiked] = react.useState(false);
+    const [likes, setLikes] = react.useState(props.likes);
     let icon = (liked) ? "heart" : "heart-outline";
     let style = (liked) ? "red" : "";
 
     function toggleLike() {
         setLiked(!liked);
+        let likesNumber = Number(likes.replace(".", ""));
+        if (!liked) {
+            likesNumber++;
+        } else {
+            likesNumber--;
+        }
+        setLikes(likesNumber.toLocaleString());
     }
 
     return (
-        <div class="acoes">
-            <div>
-                <ion-icon name={icon} onClick={toggleLike} id={style}></ion-icon>
-                <ion-icon name="chatbubble-outline"></ion-icon>
-                <ion-icon name="paper-plane-outline"></ion-icon>
-            </div>
-            <div>
-                <ion-icon name="bookmark-outline"></ion-icon>
-            </div>
-        </div>
-    )
-}
+        <div class="fundo">
 
-function Likes(props) {
-    return (
-        <div class="curtidas">
-            <img src={props.from.src} alt="Imagem do destaque"/>
-            <div class="texto">
-                Curtido por <strong>{props.from.profile}</strong> e <strong>outras {props.likes} pessoas</strong>
+            <div class="acoes">
+                <div>
+                    <ion-icon name={icon} onClick={toggleLike} id={style}></ion-icon>
+                    <ion-icon name="chatbubble-outline"></ion-icon>
+                    <ion-icon name="paper-plane-outline"></ion-icon>
+                </div>
+                <div>
+                    <ion-icon name="bookmark-outline"></ion-icon>
+                </div>
             </div>
+
+            <div class="curtidas">
+                <img src={props.from.src} alt="Imagem do destaque"/>
+                <div class="texto">
+                    Curtido por <strong>{props.from.profile}</strong> e <strong>outras {likes} pessoas</strong>
+                </div>
+            </div>
+
         </div>
     )
 }
@@ -57,11 +65,7 @@ function Post(props) {
                 <img src={props.content} alt="Imagem do post"/>
             </div>
 
-            <div class="fundo">
-                <Actions />
-
-                <Likes from={props.whoLiked} likes={props.likes}/>
-            </div>
+            <Bottom from={props.whoLiked} likes={props.likes} />
         </div>
     )
 }
