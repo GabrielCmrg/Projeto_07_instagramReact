@@ -1,3 +1,5 @@
+import react from "react";
+
 function Top(props) {
     return (
         <div class="topo">
@@ -13,10 +15,18 @@ function Top(props) {
 }
 
 function Actions() {
+    const [liked, setLiked] = react.useState(false);
+    let icon = (liked) ? "heart" : "heart-outline";
+    let style = (liked) ? "red" : "";
+
+    function toggleLike() {
+        setLiked(!liked);
+    }
+
     return (
         <div class="acoes">
             <div>
-                <ion-icon name="heart-outline"></ion-icon>
+                <ion-icon name={icon} onClick={toggleLike} id={style}></ion-icon>
                 <ion-icon name="chatbubble-outline"></ion-icon>
                 <ion-icon name="paper-plane-outline"></ion-icon>
             </div>
